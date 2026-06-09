@@ -17,6 +17,7 @@
 
 # production
 /build
+mednation-public_html.zip
 
 # misc
 .DS_Store
