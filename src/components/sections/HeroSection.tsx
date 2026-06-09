@@ -18,6 +18,7 @@ const HERO_PACKETS = PRODUCTS.map((product) => ({
   pack: product.dosage,
   packType: product.dosageForm,
   sku: product.sku,
+  image: product.image,
   icon: product.icon as PacketIconType,
 }));
 

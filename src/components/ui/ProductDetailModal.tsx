@@ -88,15 +88,17 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
             </div>
 
             <div className="overflow-y-auto bg-white">
-              <div className="flex items-center justify-center border-b border-gray-100 bg-white px-6 py-8 sm:py-10">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={320}
-                  height={320}
-                  className="h-48 w-auto object-contain sm:h-56"
-                />
-              </div>
+              {product.image && (
+                <div className="flex items-center justify-center border-b border-gray-100 bg-white px-6 py-8 sm:py-10">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={320}
+                    height={320}
+                    className="h-48 w-auto object-contain sm:h-56"
+                  />
+                </div>
+              )}
 
               <div className="bg-white px-6 py-6">
                 <p className="body-text text-center text-sm leading-relaxed sm:text-left">

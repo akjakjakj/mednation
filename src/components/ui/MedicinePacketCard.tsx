@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import BrandLogo from "@/components/ui/BrandLogo";
 
 export type PacketIconType = "capsule" | "tablet" | "gel" | "multivitamin";
@@ -12,8 +13,13 @@ export interface MedicinePacketCardProps {
   pack: string;
   packType: string;
   sku: string;
+  image?: string;
   icon?: PacketIconType;
 }
+
+const CITAMINZ_SKU = "MN-CIT-100";
+const CORVION_SKU = "MN-CRV-100";
+const CITAMINZ_TAGLINE = "Complete bone & mineral support in one daily tablet.";
 
 function ProductIcon({ type }: { type: PacketIconType }) {
   if (type === "tablet") {
@@ -78,8 +84,12 @@ export default function MedicinePacketCard({
   pack,
   packType,
   sku,
+  image,
   icon = "capsule",
 }: MedicinePacketCardProps) {
+  const isCitaminz = sku === CITAMINZ_SKU;
+  const isCorvion = sku === CORVION_SKU;
+
   return (
     <div className="medicine-packet-card relative flex h-full w-full flex-col bg-white antialiased">
       <div className="h-[3px] bg-gradient-to-r from-dark-teal via-primary to-secondary" />
@@ -101,38 +111,109 @@ export default function MedicinePacketCard({
           {category}
         </p>
 
-        <div className="mt-3 flex items-start gap-3">
-          <div className="min-w-0 flex-1">
-            <h3 className="font-heading text-base font-bold leading-snug text-dark-teal">
-              {name}
-            </h3>
-            <div className="mt-1.5 flex flex-wrap items-baseline gap-1.5">
-              <span className="font-heading text-[28px] font-bold leading-none text-dark-teal">
-                {strength}
-              </span>
-              {strengthUnit && (
-                <span className="text-sm font-bold uppercase tracking-wide text-primary">
-                  {strengthUnit}
-                </span>
-              )}
-            </div>
+        <div className="mt-2.5 flex min-h-[7.5rem] items-stretch gap-2.5">
+          <div className="flex min-w-0 flex-1 flex-col justify-between py-0.5">
+            {isCitaminz ? (
+              <>
+                <div>
+                  <h3 className="font-heading text-base font-bold leading-snug text-dark-teal">
+                    {name}
+                  </h3>
+                  {strength ? (
+                    <div className="mt-1 flex flex-wrap items-baseline gap-1">
+                      <span className="font-heading text-2xl font-bold leading-none text-dark-teal">
+                        {strength}
+                      </span>
+                      {strengthUnit && (
+                        <span className="text-xs font-bold uppercase tracking-wide text-primary">
+                          {strengthUnit}
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    strengthUnit && (
+                      <p className="mt-1 font-heading text-2xl font-bold uppercase leading-none text-primary">
+                        {strengthUnit}
+                      </p>
+                    )
+                  )}
+                  <p className="mt-2.5 text-[9px] font-medium tracking-wide text-dark-teal/45">
+                    Ca · Mg · D3 · Zn
+                  </p>
+                </div>
+
+                <p className="text-[9px] leading-relaxed text-dark-teal/50 line-clamp-2">
+                  {CITAMINZ_TAGLINE}
+                </p>
+
+                <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/15 bg-[#E8F6F4] px-2.5 py-1">
+                  <svg viewBox="0 0 24 24" className="h-3 w-3 text-primary" fill="currentColor">
+                    <path d="M12 2l2.4 4.8 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4L4.2 7.6l5.4-.8L12 2z" />
+                  </svg>
+                  <span className="text-[9px] font-bold uppercase tracking-wide text-dark-teal">
+                    GMP Certified
+                  </span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <h3 className="font-heading text-base font-bold leading-snug text-dark-teal">
+                    {name}
+                  </h3>
+                  {strength ? (
+                    <div className="mt-1.5 flex flex-wrap items-baseline gap-1.5">
+                      <span className="font-heading text-[26px] font-bold leading-none text-dark-teal">
+                        {strength}
+                      </span>
+                      {strengthUnit && (
+                        <span className="text-sm font-bold uppercase tracking-wide text-primary">
+                          {strengthUnit}
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    isCorvion &&
+                    strengthUnit && (
+                      <p className="mt-1.5 font-heading text-[26px] font-bold uppercase leading-none text-primary">
+                        {strengthUnit}
+                      </p>
+                    )
+                  )}
+                </div>
+
+                <div className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/15 bg-[#E8F6F4] px-2.5 py-1">
+                  <svg viewBox="0 0 24 24" className="h-3 w-3 text-primary" fill="currentColor">
+                    <path d="M12 2l2.4 4.8 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4L4.2 7.6l5.4-.8L12 2z" />
+                  </svg>
+                  <span className="text-[9px] font-bold uppercase tracking-wide text-dark-teal">
+                    GMP Certified
+                  </span>
+                </div>
+              </>
+            )}
           </div>
 
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-primary/15 bg-[#F4FAF9] p-2">
-            <ProductIcon type={icon} />
+          <div className="flex min-h-full w-[48%] flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-primary/12 bg-gradient-to-b from-white to-[#F4FAF9] p-0.5 shadow-[0_1px_6px_rgba(11,102,99,0.06)]">
+            {image ? (
+              <Image
+                src={image}
+                alt={name}
+                width={140}
+                height={160}
+                className="h-full min-h-[6.75rem] w-full object-contain object-center scale-[1.02]"
+                sizes="140px"
+              />
+            ) : (
+              <div className="h-14 w-14">
+                <ProductIcon type={icon} />
+              </div>
+            )}
           </div>
-        </div>
-
-        {/* GMP badge — inline, no overlap */}
-        <div className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/15 bg-[#E8F6F4] px-2.5 py-1">
-          <svg viewBox="0 0 24 24" className="h-3 w-3 text-primary" fill="currentColor">
-            <path d="M12 2l2.4 4.8 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4L4.2 7.6l5.4-.8L12 2z" />
-          </svg>
-          <span className="text-[9px] font-bold uppercase tracking-wide text-dark-teal">GMP Certified</span>
         </div>
 
         {/* Pack details */}
-        <div className="mt-4 border-t border-primary/10 pt-4">
+        <div className="mt-4 border-t border-primary/10 pt-3.5">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-md border border-primary/20 bg-primary/5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-dark-teal">
               {pack}

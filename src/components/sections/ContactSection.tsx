@@ -31,9 +31,9 @@ export default function ContactSection() {
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
         </svg>
       ),
-      label: "Phone",
-      value: BRAND.phone,
-      href: `tel:${BRAND.phone.replace(/\s/g, "")}`,
+      label: "Telephone",
+      value: BRAND.phoneSecondary,
+      href: `tel:${BRAND.phoneSecondary.replace(/\s/g, "")}`,
     },
     {
       icon: (
@@ -55,7 +55,18 @@ export default function ContactSection() {
       ),
       label: "Address",
       value: BRAND.address,
-      href: "#",
+      href: BRAND.mapsUrl,
+      external: true,
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 8h10M7 12h6" />
+        </svg>
+      ),
+      label: "GSTIN",
+      value: BRAND.gstin,
     },
   ];
 
@@ -73,7 +84,7 @@ export default function ContactSection() {
                 Get In <span className="gradient-text">Touch</span>
               </>
             }
-            description="Connect with our team for product inquiries, doctor partnerships, or distribution opportunities across therapeutic segments."
+            description="Connect with our team for product inquiries, hospital and pharmacy partnerships, or authorised distribution opportunities across Kerala."
           />
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
@@ -123,7 +134,7 @@ export default function ContactSection() {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className={inputClass}
-                          placeholder="john@example.com"
+                          placeholder={BRAND.email}
                         />
                       </div>
                       <div>
@@ -136,7 +147,7 @@ export default function ContactSection() {
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           className={inputClass}
-                          placeholder="+91 98765 43210"
+                          placeholder={BRAND.phoneSecondary}
                         />
                       </div>
                     </div>
@@ -195,47 +206,79 @@ export default function ContactSection() {
 
                 <div className="p-8 lg:p-10 pb-0">
                   <h3 className="card-title text-xl">Contact Information</h3>
-                  <p className="mt-2 text-sm font-body text-dark-teal/55 leading-relaxed">
+                  <p className="mt-2 text-sm font-body font-medium text-dark-teal/70 leading-relaxed">
+                    {BRAND.legalName}
+                  </p>
+                  <p className="mt-1 text-sm font-body text-dark-teal/55 leading-relaxed">
                     Reach us directly through any of the channels below.
                   </p>
                 </div>
 
                 <div className="flex-1 flex flex-col px-8 lg:px-10 py-6">
                   <div className="divide-y divide-primary/8 rounded-2xl border border-primary/8 bg-white/50 overflow-hidden">
-                    {contactInfo.map((info) => (
-                      <a
-                        key={info.label}
-                        href={info.href}
-                        className="flex items-center gap-4 px-5 py-4 hover:bg-primary/[0.03] transition-colors group"
-                        data-cursor="hover"
-                      >
-                        <div className="flex-shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 text-primary ring-1 ring-primary/10 group-hover:gradient-bg group-hover:text-white group-hover:ring-transparent transition-all duration-300">
-                          {info.icon}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-[11px] font-semibold uppercase tracking-wider text-dark-teal/45 font-body">
-                            {info.label}
-                          </p>
-                          <p className="text-sm text-dark-teal font-body font-medium mt-0.5 leading-snug break-words">
-                            {info.value}
-                          </p>
-                        </div>
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          className="flex-shrink-0 text-primary/25 group-hover:text-primary/60 group-hover:translate-x-0.5 transition-all"
+                    {contactInfo.map((info, index) => {
+                      const rowClass =
+                        "flex items-center gap-4 px-5 py-4 hover:bg-primary/[0.03] transition-colors group";
+                      const content = (
+                        <>
+                          <div className="flex-shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 text-primary ring-1 ring-primary/10 group-hover:gradient-bg group-hover:text-white group-hover:ring-transparent transition-all duration-300">
+                            {info.icon}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[11px] font-semibold uppercase tracking-wider text-dark-teal/45 font-body">
+                              {info.label}
+                            </p>
+                            <p className="text-sm text-dark-teal font-body font-medium mt-0.5 leading-snug break-words">
+                              {info.value}
+                            </p>
+                          </div>
+                          {info.href && (
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              className="flex-shrink-0 text-primary/25 group-hover:text-primary/60 group-hover:translate-x-0.5 transition-all"
+                            >
+                              <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                          )}
+                        </>
+                      );
+
+                      if (!info.href) {
+                        return (
+                          <div key={`${info.label}-${index}`} className={rowClass}>
+                            {content}
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <a
+                          key={`${info.label}-${index}`}
+                          href={info.href}
+                          target={info.external ? "_blank" : undefined}
+                          rel={info.external ? "noopener noreferrer" : undefined}
+                          className={rowClass}
+                          data-cursor="hover"
                         >
-                          <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
-                      </a>
-                    ))}
+                          {content}
+                        </a>
+                      );
+                    })}
                   </div>
 
-                  <div className="mt-6 flex-1 min-h-[180px] rounded-2xl overflow-hidden border border-primary/10 bg-white/40 relative">
+                  <a
+                    href={BRAND.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 flex-1 min-h-[180px] rounded-2xl overflow-hidden border border-primary/10 bg-white/40 relative block transition-all hover:border-primary/25 hover:shadow-md hover:shadow-primary/10 group/map"
+                    data-cursor="hover"
+                    aria-label="Open Mednations location in Google Maps"
+                  >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-secondary/[0.06] to-accent/[0.04]" />
 
                     <div className="absolute inset-0 opacity-[0.35]">
@@ -250,20 +293,22 @@ export default function ContactSection() {
                     </div>
 
                     <div className="relative flex h-full flex-col items-center justify-center p-6 text-center">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/80 shadow-md shadow-primary/10 ring-1 ring-primary/10 mb-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/80 shadow-md shadow-primary/10 ring-1 ring-primary/10 mb-4 transition-transform group-hover/map:scale-105">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#169C97" strokeWidth="1.5">
                           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                           <circle cx="12" cy="10" r="3" />
                         </svg>
                       </div>
-                      <p className="text-sm font-body font-medium text-dark-teal/70">Mumbai, India</p>
-                      <p className="mt-1 text-xs font-body text-dark-teal/40">Google Maps Integration</p>
+                      <p className="text-sm font-body font-medium text-dark-teal/70">
+                        {BRAND.locationLabel}
+                      </p>
+                      <p className="mt-1 text-xs font-body text-dark-teal/40">Tap to open in Google Maps</p>
                       <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary/8 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary/70">
                         <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                        Medical District
+                        {BRAND.locationArea}
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </motion.div>

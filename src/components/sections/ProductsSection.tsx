@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Product, PRODUCTS } from "@/lib/constants";
+import { CATALOGUE_PRODUCTS, Product, PRODUCTS } from "@/lib/constants";
+import CatalogueProductCard from "@/components/ui/CatalogueProductCard";
 import GlassCard from "@/components/ui/GlassCard";
 import ImagePreviewModal from "@/components/ui/ImagePreviewModal";
 import ProductDetailModal from "@/components/ui/ProductDetailModal";
@@ -27,13 +28,13 @@ export default function ProductsSection() {
             label="Our Products"
             title={
               <>
-                Premium Medicine <span className="gradient-text">Catalog</span>
+                Premium Medicine <span className="gradient-text">Catalogue</span>
               </>
             }
             description="Discover our range of certified pharmaceutical products crafted for quality, safety, and efficacy."
           />
 
-          <div className="grid items-stretch sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid items-stretch gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {PRODUCTS.map((product, i) => (
               <motion.div
                 key={product.id}
@@ -76,7 +77,7 @@ export default function ProductsSection() {
                       type="button"
                       whileHover={{ scale: 1.02 }}
                       onClick={() => setDetailProduct(product)}
-                      className="mt-6 w-full shrink-0 py-2.5 rounded-xl text-sm font-medium text-primary border border-primary/20 transition-colors outline-none hover:bg-primary/5 focus:outline-none focus-visible:outline-none"
+                      className="mt-6 w-full shrink-0 rounded-xl border border-primary/20 py-2.5 text-sm font-medium text-primary transition-colors outline-none hover:bg-primary/5 focus:outline-none focus-visible:outline-none"
                       data-cursor="hover"
                     >
                       View Details
@@ -85,6 +86,36 @@ export default function ProductsSection() {
                 </GlassCard>
               </motion.div>
             ))}
+          </div>
+
+          <div className="mt-16 lg:mt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mb-10 text-center"
+            >
+              <span className="section-label">Extended Range</span>
+              <h3 className="mt-2 font-heading text-2xl font-bold tracking-tight text-dark-teal sm:text-3xl">
+                Full Product Portfolio
+              </h3>
+              <p className="mx-auto mt-3 max-w-2xl font-body text-sm leading-relaxed text-dark-teal/55 sm:text-base">
+                Additional WHO-GMP certified formulations across psychiatry, cardiology, respiratory,
+                and hematology segments.
+              </p>
+            </motion.div>
+
+            <div className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-6">
+              {CATALOGUE_PRODUCTS.map((product, i) => (
+                <CatalogueProductCard
+                  key={product.id}
+                  product={product}
+                  index={i}
+                  inView={inView}
+                  onViewDetails={setDetailProduct}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

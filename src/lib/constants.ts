@@ -1,13 +1,22 @@
 export const BRAND = {
   name: "MEDNATIONS",
-  legalName: "Mednations Remedies Pvt Ltd",
+  legalName: "Mednations Remedies Private Limited",
   tagline:
     "Safe, effective, and globally compliant medicines that enhance patient care and strengthen healthcare outcomes.",
   headline: "High-Quality Therapeutic Solutions",
-  phone: "+91 98765 43210",
-  email: "info@mednations.com",
-  address: "123 Healthcare Avenue, Medical District, Mumbai, India 400001",
-  whatsapp: "919876543210",
+  phone: "+91 907 267 6763",
+  phoneSecondary: "+91 999 556 76 71",
+  email: "office@mednationspharma.com",
+  website: "www.mednationspharma.com",
+  websiteUrl: "https://www.mednationspharma.com",
+  address:
+    "Door No 9/325/43, First Floor, Puthussery Galeria, Thrissur, Kerala, India – 680009",
+  locationLabel: "Thrissur, Kerala",
+  locationArea: "Puthussery Galeria",
+  mapsUrl:
+    "https://www.google.com/maps/dir//MEDNATIONS+REMEDIES+Pvt+Ltd,+Pudussery,+Galleria+Arcade,+Kinar+stop,+Viyyur,+Pandikkavu,+Cheroor,+Thrissur,+Kerala+680008/@10.5113876,76.2232504,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ba7efa3f6caae21:0xed4b2c4b8efc84ef!2m2!1d76.2267812!2d10.5477074?hl=en-GB&entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D",
+  gstin: "32AAQCM4381F1ZD",
+  whatsapp: "919072676763",
 } as const;
 
 export const NAV_LINKS = [
@@ -16,6 +25,7 @@ export const NAV_LINKS = [
   { label: "Products", href: "#products" },
   { label: "Why Us", href: "#why-us" },
   { label: "Process", href: "#process" },
+  { label: "Partners", href: "#partners" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -30,9 +40,9 @@ export const ABOUT_STATS = [
   {
     value: 12,
     suffix: "",
-    label: "Cities Covered",
+    label: "Countries Covered",
     icon: "cities",
-    description: "Strategic urban cluster coverage across Tier 1 and Tier 2 cities",
+    description: "Strategic coverage across countries",
   },
   {
     value: 10,
@@ -90,7 +100,7 @@ export const PRODUCTS = [
     dosage: "10 × 10 Tablets",
     sku: "MN-CIT-100",
     icon: "tablet",
-    strength: "100",
+    strength: "",
     strengthUnit: "Tablets",
     composition: "Calcium Citrate, Magnesium, Vitamin D3 & Zinc",
     dosageForm: "Tablets",
@@ -150,7 +160,7 @@ export const PRODUCTS = [
     dosage: "10 × 10 Tablets",
     sku: "MN-CRV-100",
     icon: "multivitamin",
-    strength: "100",
+    strength: "",
     strengthUnit: "Tablets",
     composition: "Astaxanthin, Vitamins & Essential Minerals",
     dosageForm: "Tablets",
@@ -160,7 +170,232 @@ export const PRODUCTS = [
   },
 ] as const;
 
-export type Product = (typeof PRODUCTS)[number];
+export type Product = {
+  id: number;
+  name: string;
+  brandName: string;
+  description: string;
+  category: string;
+  gradient: string;
+  image?: string;
+  dosage: string;
+  sku: string;
+  icon: string;
+  strength: string;
+  strengthUnit: string;
+  composition: string;
+  dosageForm: string;
+  indication: string;
+  storage: string;
+};
+
+export const CATALOGUE_PRODUCTS: Product[] = [
+  {
+    id: 5,
+    name: "Pentixol",
+    brandName: "Pentixol",
+    description: "Flupentixol 0.5 mg + Melitracen 10 mg Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "0.5 mg + 10 mg",
+    sku: "MN-PTX-10",
+    icon: "tablet",
+    strength: "",
+    strengthUnit: "",
+    composition: "Flupentixol 0.5 mg + Melitracen 10 mg",
+    dosageForm: "Tablets",
+    indication: "Management of depressive and anxiety disorders.",
+    storage: "Store below 30°C in a dry place. Protect from light.",
+  },
+  {
+    id: 6,
+    name: "Rizcure 1 MD",
+    brandName: "Rizcure 1 MD",
+    description: "Risperidone 1 mg Mouth Dissolving Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "1 mg",
+    sku: "MN-RIZ-1MD",
+    icon: "tablet",
+    strength: "1",
+    strengthUnit: "mg",
+    composition: "Risperidone 1 mg",
+    dosageForm: "Mouth Dissolving Tablets",
+    indication: "Treatment of schizophrenia and bipolar mania.",
+    storage: "Store in a cool, dry place below 25°C.",
+  },
+  {
+    id: 7,
+    name: "Rizcure 2 MD",
+    brandName: "Rizcure 2 MD",
+    description: "Risperidone 2 mg Mouth Dissolving Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "2 mg",
+    sku: "MN-RIZ-2MD",
+    icon: "tablet",
+    strength: "2",
+    strengthUnit: "mg",
+    composition: "Risperidone 2 mg",
+    dosageForm: "Mouth Dissolving Tablets",
+    indication: "Treatment of schizophrenia and acute manic episodes.",
+    storage: "Store in a cool, dry place below 25°C.",
+  },
+  {
+    id: 8,
+    name: "Restopin 25",
+    brandName: "Restopin 25",
+    description: "Quetiapine 25 mg Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "25 mg",
+    sku: "MN-RST-25",
+    icon: "tablet",
+    strength: "25",
+    strengthUnit: "mg",
+    composition: "Quetiapine 25 mg",
+    dosageForm: "Tablets",
+    indication: "Management of schizophrenia, bipolar disorder, and major depression.",
+    storage: "Store below 30°C. Protect from moisture.",
+  },
+  {
+    id: 9,
+    name: "Cutapin 100",
+    brandName: "Cutapin 100",
+    description: "Quetiapine 100 mg Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "100 mg",
+    sku: "MN-CUT-100",
+    icon: "tablet",
+    strength: "100",
+    strengthUnit: "mg",
+    composition: "Quetiapine 100 mg",
+    dosageForm: "Tablets",
+    indication: "Management of schizophrenia and bipolar disorder.",
+    storage: "Store below 30°C. Protect from moisture.",
+  },
+  {
+    id: 10,
+    name: "Floviton 20",
+    brandName: "Floviton 20",
+    description: "Fluoxetine 20 mg Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "20 mg",
+    sku: "MN-FLO-20",
+    icon: "tablet",
+    strength: "20",
+    strengthUnit: "mg",
+    composition: "Fluoxetine 20 mg",
+    dosageForm: "Tablets",
+    indication: "Treatment of major depressive disorder, OCD, and panic disorder.",
+    storage: "Store below 30°C in a dry place.",
+  },
+  {
+    id: 11,
+    name: "Sertom 25",
+    brandName: "Sertom 25",
+    description: "Sertraline 25 mg Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "25 mg",
+    sku: "MN-SRT-25",
+    icon: "tablet",
+    strength: "25",
+    strengthUnit: "mg",
+    composition: "Sertraline 25 mg",
+    dosageForm: "Tablets",
+    indication: "Treatment of depression, anxiety, and obsessive-compulsive disorder.",
+    storage: "Store below 30°C. Protect from light.",
+  },
+  {
+    id: 12,
+    name: "Sertom 50",
+    brandName: "Sertom 50",
+    description: "Sertraline 50 mg Tablets",
+    category: "Psychiatry",
+    gradient: "from-violet-500/20 to-primary/20",
+    dosage: "50 mg",
+    sku: "MN-SRT-50",
+    icon: "tablet",
+    strength: "50",
+    strengthUnit: "mg",
+    composition: "Sertraline 50 mg",
+    dosageForm: "Tablets",
+    indication: "Treatment of depression, panic disorder, and PTSD.",
+    storage: "Store below 30°C. Protect from light.",
+  },
+  {
+    id: 13,
+    name: "Palipearl",
+    brandName: "Palipearl",
+    description: "Ferrous Ascorbate 100 mg + Folic Acid 1.5 mg + Zinc 22.5 mg Tablets",
+    category: "Hematology",
+    gradient: "from-pink-500/20 to-primary/20",
+    dosage: "100 mg + 1.5 mg + 22.5 mg",
+    sku: "MN-PAL-100",
+    icon: "tablet",
+    strength: "",
+    strengthUnit: "",
+    composition: "Ferrous Ascorbate 100 mg + Folic Acid 1.5 mg + Zinc 22.5 mg",
+    dosageForm: "Tablets",
+    indication: "Iron deficiency anemia and nutritional supplementation during pregnancy.",
+    storage: "Store below 30°C in a dry place.",
+  },
+  {
+    id: 14,
+    name: "Montinox L",
+    brandName: "Montinox L",
+    description: "Montelukast 10 mg + Levocetirizine DiHCl 5 mg Tablets",
+    category: "Respiratory",
+    gradient: "from-sky-500/20 to-primary/20",
+    dosage: "10 mg + 5 mg",
+    sku: "MN-MNT-L",
+    icon: "tablet",
+    strength: "",
+    strengthUnit: "",
+    composition: "Montelukast 10 mg + Levocetirizine DiHCl 5 mg",
+    dosageForm: "Tablets",
+    indication: "Allergic rhinitis, asthma, and chronic urticaria management.",
+    storage: "Store below 30°C. Protect from light and moisture.",
+  },
+  {
+    id: 15,
+    name: "Copetab 20",
+    brandName: "Copetab 20",
+    description: "Atorvastatin 20 mg Tablets",
+    category: "Cardiology",
+    gradient: "from-rose-500/20 to-primary/20",
+    dosage: "20 mg",
+    sku: "MN-COP-20",
+    icon: "tablet",
+    strength: "20",
+    strengthUnit: "mg",
+    composition: "Atorvastatin 20 mg",
+    dosageForm: "Tablets",
+    indication: "Hyperlipidemia and cardiovascular risk reduction.",
+    storage: "Store below 30°C in original packaging.",
+  },
+  {
+    id: 16,
+    name: "Hemafine Gold",
+    brandName: "Hemafine Gold",
+    description:
+      "Rosuvastatin Calcium 10 mg + Clopidogrel Bisulphate 75 mg + Aspirin 75 mg Capsules",
+    category: "Cardiology",
+    gradient: "from-rose-500/20 to-primary/20",
+    dosage: "10 mg + 75 mg + 75 mg",
+    sku: "MN-HEM-GOLD",
+    icon: "capsule",
+    strength: "",
+    strengthUnit: "",
+    composition: "Rosuvastatin Calcium 10 mg + Clopidogrel Bisulphate 75 mg + Aspirin 75 mg",
+    dosageForm: "Capsules",
+    indication: "Cardiovascular protection in patients at risk of atherothrombotic events.",
+    storage: "Store below 30°C in a dry place. Keep out of reach of children.",
+  },
+];
 
 export const FEATURES = [
   {
@@ -225,9 +460,61 @@ export const PROCESS_STEPS = [
   },
 ] as const;
 
+export const BUSINESS_PARTNERS = {
+  headline: "Statewide Distribution Network",
+  description:
+    "Mednations collaborates with authorised distributors, hospitals, and retail pharmacies across Kerala — building a dependable supply chain that ensures product availability, ethical distribution, and consistent patient access to quality medicines.",
+  stats: [
+    {
+      value: 14,
+      suffix: "",
+      label: "District Distributors",
+      icon: "distributor",
+      description:
+        "Complete coverage across all 14 districts of Kerala through certified, territory-aligned distribution partners.",
+    },
+    {
+      value: 750,
+      suffix: "+",
+      label: "Hospital Partners",
+      icon: "hospital",
+      description:
+        "Supplying multi-specialty hospitals, nursing homes, and clinical institutions with trusted therapeutic solutions.",
+    },
+    {
+      value: 1000,
+      suffix: "+",
+      label: "Pharmacy Partners",
+      icon: "pharmacy",
+      description:
+        "A growing retail pharmacy network enabling reliable last-mile availability for patients and prescribers statewide.",
+    },
+  ],
+  highlights: [
+    {
+      title: "End-to-End Supply Chain",
+      description:
+        "From authorised distributors to hospital and pharmacy counters — seamless logistics with full regulatory compliance.",
+      icon: "supply",
+    },
+    {
+      title: "Statewide Reach",
+      description:
+        "Pan-Kerala presence ensuring medicines reach urban centres and tier-2 markets without compromise on quality.",
+      icon: "reach",
+    },
+    {
+      title: "Partnership-Led Growth",
+      description:
+        "Long-term alliances built on transparency, timely fulfilment, and shared commitment to patient outcomes.",
+      icon: "growth",
+    },
+  ],
+} as const;
+
 export const STATS = [
   { value: 135, suffix: "+", label: "Doctors Engaged" },
-  { value: 12, suffix: "", label: "Cities Covered" },
+  { value: 12, suffix: "", label: "Countries Covered" },
   { value: 78, suffix: "%+", label: "Repeat Prescriptions" },
   { value: 10, suffix: "+", label: "Years Experience" },
 ] as const;
@@ -261,6 +548,7 @@ export const FOOTER_LINKS = {
     { label: "Home", href: "#home" },
     { label: "About Us", href: "#about" },
     { label: "Products", href: "#products" },
+    { label: "Business Partners", href: "#partners" },
     { label: "Contact", href: "#contact" },
   ],
   products: [
